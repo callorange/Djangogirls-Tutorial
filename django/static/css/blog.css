@@ -1,0 +1,32 @@
+body {
+    font-size: 13px;
+}
+
+.header {
+    background-color: #dcdcdc;
+    padding: 15px 0px 15px;
+}
+.header a {
+    color: white;
+}
+
+.post {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+.post:last-child{
+    border: none;
+}
+
+.post > .post-date {
+    text-align: right;
+    font-size: 11px;
+    margin-bottom: -11px;
+}
+.post > .post-title {
+}
+.post > .post-content {
+    max-height:190px;
+    overflow: hidden
+}

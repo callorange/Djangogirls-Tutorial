@@ -8,8 +8,6 @@ def post_list(request):
     context = {
         'posts': posts,
     }
-    html = '''
-    '''
     return render(
         request=request,
         template_name='blog/post_list.html',
