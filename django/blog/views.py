@@ -7,4 +7,8 @@ def post_list(request):
 
 
 def post_list2(request):
-    return HttpResponse('post_list2')
+    return render(request, 'blog/post_list2.html')
+
+
+def post_detail(requst):
+    return render(requst, 'blog/post_detail.html')
