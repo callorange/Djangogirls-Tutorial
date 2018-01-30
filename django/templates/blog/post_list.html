@@ -8,7 +8,19 @@
     <title>DjangoGirls Tutorial</title>
 </head>
 <body>
-    <h1>Post List</h1>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, vitae.</p>
+    <div>
+        <h1><a href="">Django Girls Blog</a></h1>
+        {% for post in posts %}
+        <div>{{ post.title }}</div>
+        {% endfor %}
+    </div>
+
+    {% for post in posts %}
+    <div>
+        <p>{{ post.published_date }}</p>
+        <h2><a href="">{{ post.title }}</a></h2>
+        <p>{{ post.content|linebreaksbr }}</p>
+    </div>
+    {% endfor %}
 </body>
 </html>
