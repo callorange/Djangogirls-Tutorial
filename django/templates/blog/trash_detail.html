@@ -21,7 +21,7 @@
         <div class="post">
             <p class="post-date">{{ post.published_date }}</p>
             <h2 class="post-title"><a href="">{{ post.title }}</a></h2>
-            <a href="{% url 'post-del' post.pk %}">move to trash</a>
+            <a href="{% url 'trash-rollback' post.pk %}">move to post</a>
             <p class="post-content full">{{ post.content|linebreaksbr }}</p>
         </div>
     </div>
