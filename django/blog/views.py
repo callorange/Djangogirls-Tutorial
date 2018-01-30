@@ -20,5 +20,6 @@ def post_list2(request):
     return render(request, 'blog/notfound.html')
 
 
-def post_detail(requst):
-    return render(requst, 'blog/post_detail.html')
+def post_detail(requst, pk):
+    post = Post.objects.get(pk=pk)
+    return render(requst, 'blog/post_detail.html', {"post":post})
