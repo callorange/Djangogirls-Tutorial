@@ -27,6 +27,10 @@ body {
 .post > .post-title {
 }
 .post > .post-content {
-    max-height:190px;
+    max-height: 190px;
     overflow: hidden
+}
+.post > .post-content.full {
+    max-height: initial;
+    overflow: initial;
 }
