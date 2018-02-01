@@ -47,21 +47,20 @@ def post_del(request, pk):
 
 
 def post_add(request):
-    res = ''
+    form_err = ''
     if request.method == 'POST':
-        frm = request.POST
-
-        post = Post.objects.create(
-            author=request.user,
-            title=frm["title"],
-            content=frm["content"],
-        )
-
-        # res = redirect('post-detail', pk=post.pk)
-        res = redirect(f'/post/{post.pk}')
-    else:
-        res = render(request, 'blog/post_add_edit.html')
-    return res
+        if request.POST['title'].strip() == '' or request.POST['content'].strip() == '':
+            form_err = "title or content is blank!!"
+        else:
+            frm = request.POST
+            post = Post.objects.create(
+                author=request.user,
+                title=frm["title"],
+                content=frm["content"],
+            )
+            # return redirect('post-detail', pk=post.pk)
+            return redirect(f'/post/{post.pk}')
+    return render(request, 'blog/post_add_edit.html', {'form_err': form_err})
 
 
 def post_edit(request, pk):
@@ -69,14 +68,16 @@ def post_edit(request, pk):
         return redirect('post-list')
 
     post = Post.objects.get(pk=pk)
+    form_err = ''
     if request.method == 'POST':
-        if request.user == post.author:
+        if request.POST['title'].strip() == '' or request.POST['content'].strip() == '':
+            form_err = "title or content is blank!!"
+        elif request.user == post.author:
             post.title = request.POST['title']
             post.content = request.POST['content']
             post.save()
-        return redirect('post-detail', pk=pk)
-    else:
-        return render(request, 'blog/post_add_edit.html', {'post': post})
+            return redirect('post-detail', pk=pk)
+    return render(request, 'blog/post_add_edit.html', {'post': post, 'form_err': form_err})
 
 
 def trash_list(request):
