@@ -5,6 +5,10 @@ body {
 .header {
     background-color: #000;
     padding: 15px 0px 15px;
+    background-image: url('http://www.4usky.com/data/out/24/164195275-danbo-wallpapers.jpg');
+    background-repeat: no-repeat;
+    background-position: 50% 30%;
+    background-size: 80%;
 }
 .header a {
     color: white;

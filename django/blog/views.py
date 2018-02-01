@@ -67,16 +67,15 @@ def post_add(request):
 def post_edit(request, pk):
     if not Post.objects.filter(pk=pk).exists():
         return redirect('post-list')
-    elif request.method == 'POST':
-        post = Post.objects.get(pk=pk)
+
+    post = Post.objects.get(pk=pk)
+    if request.method == 'POST':
         if request.user == post.author:
             post.title = request.POST['title']
             post.content = request.POST['content']
             post.save()
-            return redirect('post-detail', pk=pk)
-        return redirect('post-list')
+        return redirect('post-detail', pk=pk)
     else:
-        post = Post.objects.get(pk=pk)
         return render(request, 'blog/post_edit.html', {'post': post})
 
 
