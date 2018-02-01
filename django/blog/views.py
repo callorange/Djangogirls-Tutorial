@@ -46,6 +46,40 @@ def post_del(request, pk):
     return redirect('/list')
 
 
+def post_add(request):
+    res = ''
+    if request.method == 'POST':
+        frm = request.POST
+
+        post = Post.objects.create(
+            author=request.user,
+            title=frm["title"],
+            content=frm["content"],
+        )
+
+        # res = redirect('post-detail', pk=post.pk)
+        res = redirect(f'/post/{post.pk}')
+    else:
+        res = render(request, 'blog/post_add.html')
+    return res
+
+
+def post_edit(request, pk):
+    if not Post.objects.filter(pk=pk).exists():
+        return redirect('post-list')
+    elif request.method == 'POST':
+        post = Post.objects.get(pk=pk)
+        if request.user == post.author:
+            post.title = request.POST['title']
+            post.content = request.POST['content']
+            post.save()
+            return redirect('post-detail', pk=pk)
+        return redirect('post-list')
+    else:
+        post = Post.objects.get(pk=pk)
+        return render(request, 'blog/post_edit.html', {'post': post})
+
+
 def trash_list(request):
     posts = PostTrash.objects.using('external').all().order_by('-created_date')
     context = {
@@ -85,21 +119,3 @@ def trash_rollback(request, pk):
         p.save()
 
     return redirect('/trash/list')
-
-
-def post_add(request):
-    res = ''
-    if request.method == 'POST':
-        frm = request.POST
-
-        post = Post.objects.create(
-            author=request.user,
-            title=frm["title"],
-            content=frm["content"],
-        )
-
-        # res = redirect('post-detail', pk=post.pk)
-        res = redirect(f'/post/{post.pk}')
-    else:
-        res = render(request, 'blog/post_add.html')
-    return res

@@ -6,10 +6,17 @@
 {% endblock %}
 
 {% block move-to %}
-<form action="{% url 'post-del' post.pk %}" method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-warning">
-        move to trash
-    </button>
-</form>
+<div class="row">
+    <div class="col-6">
+        <a href="{% url 'post-edit' post.pk %}" class="btn btn-warning">Edit</a>
+    </div>
+    <div class="col-6 text-right">
+        <form action="{% url 'post-del' post.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">
+                move to trash
+            </button>
+        </form>
+    </div>
+</div>
 {% endblock %}

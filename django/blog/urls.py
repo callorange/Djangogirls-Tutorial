@@ -8,6 +8,7 @@ urlpatterns = [
     path('post/<int:pk>', views.post_detail, name='post-detail'),
     # re_path(r"(?P<pk>[0-9]+)$", views.post_detail)
     path('post/<int:pk>/del', views.post_del, name='post-del'),
+    path('post/<int:pk>/edit', views.post_edit, name='post-edit'),
 
     path('trash/list', views.trash_list, name='trash-list'),
     path('trash/<int:pk>', views.trash_detail, name='trash-detail'),

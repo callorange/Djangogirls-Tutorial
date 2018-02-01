@@ -19,6 +19,11 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        verbose_name = '글'
+        verbose_name_plural = '목록'
+        ordering = ['-created_date', 'title']
+
 class PostTrash(models.Model):
     author = models.IntegerField()
     title = models.CharField(max_length=200)

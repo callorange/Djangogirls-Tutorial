@@ -22,9 +22,9 @@
         <div class="post">
             <p class="post-date">{{ post.published_date }}</p>
             <h2 class="post-title"><a href="">{{ post.title }}</a></h2>
-            {% block move-to %}{% endblock %}
             <p class="post-content full">{{ post.content|linebreaksbr }}</p>
         </div>
+        {% block move-to %}{% endblock %}
     </div>
 </body>
 </html>

@@ -6,10 +6,14 @@
 {% endblock %}
 
 {% block move-to %}
-<form action="{% url 'trash-rollback' post.pk %}" method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-warning">
-        move to post
-    </button>
-</form>
+<div class="row">
+    <div class="col-12 text-right">
+        <form action="{% url 'trash-rollback' post.pk %}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-warning">
+                move to post
+            </button>
+        </form>
+    </div>
+</div>
 {% endblock %}
