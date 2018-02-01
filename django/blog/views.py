@@ -25,22 +25,23 @@ def post_detail(requst, pk):
     return render(requst, 'blog/post_detail.html', {"post":post})
 
 
-def post_del(requst, pk):
-    post = Post.objects.get(pk=pk)
-    author = post.author.pk
-    title = post.title
-    content = post.content
-    created_date = post.created_date
-    published_date = post.published_date
-    post.delete()
+def post_del(request, pk):
+    if request.method == 'POST':
+        post = Post.objects.get(pk=pk)
+        author = post.author.pk
+        title = post.title
+        content = post.content
+        created_date = post.created_date
+        published_date = post.published_date
+        post.delete()
 
-    # author = models.IntegerField()
-    # title = models.CharField(max_length=200)
-    # content = models.TextField(blank=True)
-    # created_date = models.DateTimeField(default=timezone.now)
-    # published_date = models.DateTimeField(blank=True, null=True)
-    t = PostTrash(author=author, title=title, content=content, created_date=created_date, published_date=published_date)
-    t.save()
+        # author = models.IntegerField()
+        # title = models.CharField(max_length=200)
+        # content = models.TextField(blank=True)
+        # created_date = models.DateTimeField(default=timezone.now)
+        # published_date = models.DateTimeField(blank=True, null=True)
+        t = PostTrash(author=author, title=title, content=content, created_date=created_date, published_date=published_date)
+        t.save()
 
     return redirect('/list')
 
@@ -65,22 +66,23 @@ def trash_detail(request, pk):
     return render(request, 'blog/trash_detail.html', {"post":post})
 
 
-def trash_rollback(requst, pk):
-    trash = PostTrash.objects.using('external').get(pk=pk)
-    author = models.User.objects.get(pk=trash.author)
-    title = trash.title
-    content = trash.content
-    created_date = trash.created_date
-    published_date = trash.published_date
-    trash.delete()
+def trash_rollback(request, pk):
+    if request.method == 'POST':
+        trash = PostTrash.objects.using('external').get(pk=pk)
+        author = models.User.objects.get(pk=trash.author)
+        title = trash.title
+        content = trash.content
+        created_date = trash.created_date
+        published_date = trash.published_date
+        trash.delete()
 
-    # author = models.IntegerField()
-    # title = models.CharField(max_length=200)
-    # content = models.TextField(blank=True)
-    # created_date = models.DateTimeField(default=timezone.now)
-    # published_date = models.DateTimeField(blank=True, null=True)
-    p = Post(author=author, title=title, content=content, created_date=created_date, published_date=published_date)
-    p.save()
+        # author = models.IntegerField()
+        # title = models.CharField(max_length=200)
+        # content = models.TextField(blank=True)
+        # created_date = models.DateTimeField(default=timezone.now)
+        # published_date = models.DateTimeField(blank=True, null=True)
+        p = Post(author=author, title=title, content=content, created_date=created_date, published_date=published_date)
+        p.save()
 
     return redirect('/trash/list')
 

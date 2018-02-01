@@ -6,5 +6,10 @@
 {% endblock %}
 
 {% block move-to %}
-    <a href="{% url 'trash-rollback' post.pk %}">move to post</a>
+<form action="{% url 'trash-rollback' post.pk %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-warning">
+        move to post
+    </button>
+</form>
 {% endblock %}
