@@ -46,7 +46,7 @@ def post_del(requst, pk):
 
 
 def trash_list(request):
-    posts = PostTrash.objects.all().order_by('-created_date')
+    posts = PostTrash.objects.using('external').all().order_by('-created_date')
     context = {
         'posts': posts,
     }
@@ -59,14 +59,14 @@ def trash_list(request):
 
 def trash_detail(requst, pk):
     try:
-        post = PostTrash.objects.get(pk=pk)
+        post = PostTrash.objects.using('external').get(pk=pk)
     except:
         return redirect('trash/list')
     return render(requst, 'blog/trash_detail.html', {"post":post})
 
 
 def trash_rollback(requst, pk):
-    trash = PostTrash.objects.get(pk=pk)
+    trash = PostTrash.objects.using('external').get(pk=pk)
     author = models.User.objects.get(pk=trash.author)
     title = trash.title
     content = trash.content
