@@ -2,7 +2,9 @@
 
 {% block title_area %}
     <h1><a href="{% url 'post-list' %}">Django Girls Blog</a></h1>
-    <span><a href="{% url 'trash-list' %}">move to trash list</a></span>
+    <div class="text-right">
+        <a href="{% url 'trash-list' %}" class="btn btn-info">move to trash list</a>
+    </div>
 {% endblock %}
 
 {% block move-to %}
