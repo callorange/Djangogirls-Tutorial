@@ -86,4 +86,18 @@ def trash_rollback(requst, pk):
 
 
 def post_add(request):
-    return render(request, 'blog/post_add.html')
+    res = ''
+    if request.method == 'POST':
+        frm = request.POST
+
+        post = Post.objects.create(
+            author=request.user,
+            title=frm["title"],
+            content=frm["content"],
+        )
+
+        # res = redirect('post-detail', pk=post.pk)
+        res = redirect(f'/post/{post.pk}')
+    else:
+        res = render(request, 'blog/post_add.html')
+    return res

@@ -4,3 +4,7 @@
     <h1><a href="{% url 'post-list' %}">Django Girls Blog</a></h1>
     <span><a href="{% url 'trash-list' %}">move to trash list</a></span>
 {% endblock %}
+
+{% block move-to %}
+    <a href="{% url 'post-del' post.pk %}">move to trash</a>
+{% endblock %}
