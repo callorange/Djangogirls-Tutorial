@@ -1,31 +1,16 @@
-{% load static %}
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DjangoGirls Tutorial</title>
-    <link rel="stylesheet" href="{% static '/bootstrap/css/bootstrap.css' %}">
-    <link rel="stylesheet" href="{% static '/css/blog.css' %}">
-</head>
-<body>
-    <div class="header">
-        <div class="container">
-            <h1><a href="{% url 'trash-list' %}">Django Girls Blog - Trash</a></h1>
-            <span><a href="{% url 'post-list' %}">move to post list</a></span>
-        </div>
-    </div>
+{% extends 'base.html' %}
 
-    <div class="container">
-        {% for post in posts %}
-        <div class="post">
-            <p class="post-date">published : {{ post.published_date }}</p>
-            <h2 class="post-title"><a href="{% url 'trash-detail' pk=post.pk %}">{{ post.title }}</a></h2>
-            <p class="post-content">{{ post.content|linebreaksbr|truncatewords:20 }}</p>
-        </div>
-        {% endfor %}
+{% block title_area %}
+    <h1><a href="{% url 'trash-list' %}">Django Girls Blog - Trash</a></h1>
+    <span><a href="{% url 'post-list' %}">move to post list</a></span>
+{% endblock %}
+
+{% block content %}
+    {% for post in posts %}
+    <div class="post">
+        <p class="post-date">published : {{ post.published_date }}</p>
+        <h2 class="post-title"><a href="{% url 'trash-detail' pk=post.pk %}">{{ post.title }}</a></h2>
+        <p class="post-content">{{ post.content|linebreaksbr|truncatewords:20 }}</p>
     </div>
-</body>
-</html>
+    {% endfor %}
+{% endblock %}
