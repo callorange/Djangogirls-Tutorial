@@ -60,7 +60,7 @@ def post_add(request):
         # res = redirect('post-detail', pk=post.pk)
         res = redirect(f'/post/{post.pk}')
     else:
-        res = render(request, 'blog/post_add.html')
+        res = render(request, 'blog/post_add_edit.html')
     return res
 
 
@@ -76,7 +76,7 @@ def post_edit(request, pk):
             post.save()
         return redirect('post-detail', pk=pk)
     else:
-        return render(request, 'blog/post_edit.html', {'post': post})
+        return render(request, 'blog/post_add_edit.html', {'post': post})
 
 
 def trash_list(request):
