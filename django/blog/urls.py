@@ -12,4 +12,6 @@ urlpatterns = [
     path('trash/list', views.trash_list, name='trash-list'),
     path('trash/<int:pk>', views.trash_detail, name='trash-detail'),
     path('trash/<int:pk>/rollback', views.trash_rollback, name='trash-rollback'),
+
+    path('add', views.post_add, name='post-add')
 ]

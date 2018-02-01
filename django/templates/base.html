@@ -15,10 +15,12 @@
         <div class="container">
             {% block title_area %}
             {% endblock %}
+            <a class="btn btn-primary" href="{% url 'post-add' %}" role="button">Post Add</a>
         </div>
     </div>
 
     <div class="container">
+        <h2>{% block content-title %}{% endblock %}</h2>
         {% block content %}
         {% endblock %}
     </div>

@@ -57,12 +57,12 @@ def trash_list(request):
     )
 
 
-def trash_detail(requst, pk):
+def trash_detail(request, pk):
     try:
         post = PostTrash.objects.using('external').get(pk=pk)
     except:
         return redirect('trash/list')
-    return render(requst, 'blog/trash_detail.html', {"post":post})
+    return render(request, 'blog/trash_detail.html', {"post":post})
 
 
 def trash_rollback(requst, pk):
@@ -83,3 +83,7 @@ def trash_rollback(requst, pk):
     p.save()
 
     return redirect('/trash/list')
+
+
+def post_add(request):
+    return render(request, 'blog/post_add.html')
