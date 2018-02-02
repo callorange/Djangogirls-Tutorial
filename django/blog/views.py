@@ -95,9 +95,9 @@ def trash_list(request):
 def trash_detail(request, pk):
     try:
         post = PostTrash.objects.using('external').get(pk=pk)
-    except:
+    except Exception:
         return redirect('trash/list')
-    return render(request, 'blog/trash_detail.html', {"post":post})
+    return render(request, 'blog/trash_detail.html', {"post": post})
 
 
 def trash_rollback(request, pk):
